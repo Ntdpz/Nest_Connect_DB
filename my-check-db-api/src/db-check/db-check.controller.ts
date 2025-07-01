@@ -19,6 +19,27 @@ export class DbCheckController {
           : 'Failed to connect to PostgreSQL.';
         break;
       // จะเพิ่ม case สำหรับ DB อื่นๆ ในภายหลัง
+
+      case 'mysql': // เพิ่ม Case สำหรับ MySQL
+        isConnected = await this.dbCheckService.checkMysql();
+        message = isConnected
+          ? 'MySQL connected successfully.'
+          : 'Failed to connect to MySQL.';
+        break;
+
+      case 'mssql': // เพิ่ม Case สำหรับ MSSQL
+        isConnected = await this.dbCheckService.checkMssql();
+        message = isConnected
+          ? 'MSSQL connected successfully.'
+          : 'Failed to connect to MSSQL.';
+        break;
+
+      case 'mongodb': // เพิ่ม Case สำหรับ MongoDB
+        isConnected = await this.dbCheckService.checkMongodb();
+        message = isConnected
+          ? 'MongoDB connected successfully.'
+          : 'Failed to connect to MongoDB.';
+        break;
       default:
         return res.status(HttpStatus.BAD_REQUEST).json({
           status: 'error',
