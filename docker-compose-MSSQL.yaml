@@ -1,0 +1,15 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    container_name: mssql-db
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Str0ngP@ssword!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: always
+
+volumes:
+  mssql_data:

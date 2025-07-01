@@ -1,0 +1,30 @@
+
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin001
+      POSTGRES_PASSWORD: admin001
+      POSTGRES_DB: PSQL_DB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # เปิดให้เชื่อมต่อจาก pgAdmin desktop ได้
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: my_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin001@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin001
+    ports:
+      - "5050:80"  # เข้าผ่าน browser ได้ที่ http://localhost:5050
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
